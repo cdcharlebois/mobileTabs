@@ -1,0 +1,56 @@
+//tab container background
+.mx-tabcontainer-tabs.owl-carousel .owl-stage-outer{
+    background-color: #ccc;
+}
+
+//tabs styles
+.mx-tabcontainer-tabs.owl-carousel .owl-stage-outer .owl-item li{
+     border-bottom: 6px solid transparent;
+   -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.mx-tabcontainer-tabs.owl-carousel .owl-stage-outer .owl-item li a{
+    padding: 14px 14px 8px;
+}
+
+.mx-tabcontainer-tabs.owl-carousel .owl-stage-outer .owl-item li a:hover{
+    text-decoration: none;
+}
+
+.mx-tabcontainer-tabs.owl-carousel .owl-stage-outer .owl-item li.active{
+    border-bottom: 6px solid #fff;
+
+}
+
+.mx-tabcontainer-tabs.owl-carousel .owl-stage-outer .owl-item li.active a{
+    color: #fff;
+}
+
+.mx-tabcontainer-tabs.owl-carousel{
+    position: relative;
+    
+}
+.mx-tabcontainer-tabs.owl-carousel .owl-nav{
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.mx-tabcontainer-tabs.owl-carousel .owl-nav .owl-prev{
+    //align-self: flex-start;
+    
+}
+.mx-tabcontainer-tabs.owl-carousel .owl-nav .owl-next{
+    //align-self: flex-end;
+    
+}
+
+.mx-tabcontainer-tabs.owl-carousel .owl-nav .owl-prev, 
+.mx-tabcontainer-tabs.owl-carousel .owl-nav .owl-next{
+    padding: 14px;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+}

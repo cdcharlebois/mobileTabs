@@ -2862,8 +2862,8 @@ require(['MobileTabs/lib/jquery-1.11.2'], function(myjq) {
         Navigation.Defaults = {
             nav: false,
             navText: [
-                '<span aria-label="' + 'prev' + '">&#x2039;</span>',
-                '<span aria-label="' + 'next' + '">&#x203a;</span>'
+                '<span aria-label="' + 'prev' + '"></span>',
+                '<span aria-label="' + 'next' + '"></span>'
             ],
             navSpeed: false,
             navElement: 'button role="presentation"',

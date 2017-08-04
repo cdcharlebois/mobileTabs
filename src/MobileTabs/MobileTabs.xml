@@ -6,10 +6,20 @@
     <icon />
 
     <properties>
-        <property key="dummyKey" type="string" required="false" defaultValue="">
-            <caption>Dummy key</caption>
-            <category>Appearance</category>
-            <description>This key was added to make the widget work in the Modeler (needs atleast 1 key). Please change/remove this one</description>
+        <property key="breakpoint" type="integer" required="true" defaultValue="640">
+            <caption>breakpoint</caption>
+            <category>General</category>
+            <description>Screen Width (in pixels) to split between the Large Number of items and the Small Number</description>
+        </property>
+        <property key="largeNumber" type="integer" required="true" defaultValue="5">
+            <caption>Large Number</caption>
+            <category>General</category>
+            <description>Number of tabs to show above the breakpoint</description>
+        </property>
+        <property key="smallNumber" type="integer" required="true" defaultValue="3">
+            <caption>Small Number</caption>
+            <category>General</category>
+            <description>Number of tabs to show below the breakpoint</description>
         </property>
     </properties>
 </widget>

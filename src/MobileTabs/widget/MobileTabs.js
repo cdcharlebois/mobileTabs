@@ -28,6 +28,7 @@ define([
         breakpoint: null,
         smallNumber: null,
         largeNumber: null,
+        TabsClass: null,
         // Internal variables.
         _handles: null,
         _contextObj: null,
@@ -115,7 +116,12 @@ define([
 
             // add the no swiping class
             $('.owl-stage-outer').addClass('swiper-no-swiping')
-            $('.swiper-no-swiping > ul').css({ height: $('.swiper-no-swiping > ul').height() - $('.owl-nav').height() + 'px' })
+            $(ul).css({ height: $(ul).height() - $('.owl-nav').height() + 'px' })
+
+            if (this.TabsClass) {
+                $('.owl-stage-outer').addClass(this.TabsClass)
+            }
+
 
             this._executeCallback(callback);
         },
@@ -127,7 +133,7 @@ define([
                 active = $('.owl-item.active').length,
                 allItems = $('.owl-item').length;
             // if the number of active tabs is less than the number that should be displayed, hide some buttons..?
-            if (window.innerWidth > this.breakpoint && active < lItems || window.width < this.breakpoint && active < sItems) {
+            if (window.innerWidth > this.breakpoint && active < lItems || window.innerWidth < this.breakpoint && active < sItems) {
                 if (id > allItems / 2) {
                     // if the one you click is > half, hide the next button    
                     $('.owl-next').addClass('invisible')

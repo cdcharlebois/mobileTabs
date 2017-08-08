@@ -21,5 +21,10 @@
             <category>General</category>
             <description>Number of tabs to show below the breakpoint</description>
         </property>
+        <property key="TabsClass" type="string" required="false" defaultValue="">
+            <caption>Tabs Class (To Add)</caption>
+            <category>General</category>
+            <description>Add a class to the bar of tab headings</description>
+        </property>
     </properties>
 </widget>

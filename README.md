@@ -28,7 +28,7 @@ Reponsive, scroll/swipeable tabs
 ### Typical usage scenario
 
 - When you have a lot of tabs and don't want them to stack 🍔
-- Works nicely with **Swipeable Tabs** widget
+- Works nicely with **[Swipeable Tabs](https://github.com/cdcharlebois/SwipeableTabs)** widget
 
 ### Known Limitations
 

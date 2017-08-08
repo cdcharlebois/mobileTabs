@@ -3,7 +3,7 @@
 
 # Responsive Tabs 📱
 
-Reponsive, scroll/swipeable tabs
+Responsive, scroll/swipeable tabs
 
 ![BD6C7C71-2B4E-4772-824B-A8C5E15D2371](./assets/BD6C7C71-2B4E-4772-824B-A8C5E15D2371.png)
 

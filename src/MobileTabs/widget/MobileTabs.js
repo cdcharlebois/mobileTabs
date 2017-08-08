@@ -73,12 +73,12 @@ define([
             // get the ul as the tab carousel
             var tabsOwl = $('.owl-carousel');
             // add event listeners to each item
-            Array.from(tabs).forEach(function(item) {
-                item.addEventListener('click', function() {
+            Array.from(tabs).forEach(lang.hitch(this, function(item) {
+                this.connect(item, 'onclick', lang.hitch(this, function() {
                     tabsOwl.owlCarousel('to', item.dataset.id * 1);
-                    self._updateButtonVisibility(item.dataset.id * 1);
-                })
-            });
+                    this._updateButtonVisibility(item.dataset.id * 1);
+                }))
+            }));
 
             // init carousel
             var brk = "" + this.breakpoint,
@@ -92,7 +92,11 @@ define([
                 items: this.smallNumber,
                 loop: false,
                 margin: 0,
-                responsive: responsive
+                responsive: responsive,
+                onDrag: function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
             };
 
             tabsOwl.owlCarousel(options);
@@ -108,6 +112,10 @@ define([
                 position: 'relative',
                 top: -1 * (tabsHeight / 2 + buttonContainerHeight / 2) + 'px'
             });
+
+            // add the no swiping class
+            $('.owl-stage-outer').addClass('swiper-no-swiping')
+            $('.swiper-no-swiping > ul').css({ height: $('.swiper-no-swiping > ul').height() - $('.owl-nav').height() + 'px' })
 
             this._executeCallback(callback);
         },

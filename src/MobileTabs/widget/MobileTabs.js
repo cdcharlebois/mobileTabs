@@ -29,6 +29,10 @@ define([
         smallNumber: null,
         largeNumber: null,
         TabsClass: null,
+
+        ul: null,
+        tabs: null,
+        instanceContainerSelector: null,
         // Internal variables.
         _handles: null,
         _contextObj: null,
@@ -64,20 +68,32 @@ define([
             var self = this;
             logger.debug(this.id + "._updateRendering");
 
-            // get the wrapper and each item
-            var ul = this.domNode.parentElement.querySelector('ul'),
-                tabs = ul.children;
+            this._setupDOM();
 
-            // set the className on the wrapper
-            ul.className += ' owl-carousel';
+            this._initializeOwlCarousel(this.instanceContainerSelector);
 
+            // add the no swiping class
+            $('.owl-stage-outer').addClass('swiper-no-swiping')
+            $(this.ul).css({ height: $(this.ul).height() - $('.owl-nav').height() + 'px' })
+
+            if (this.TabsClass) {
+                $('.owl-stage-outer').addClass(this.TabsClass)
+            }
+
+
+            this._executeCallback(callback);
+        },
+
+        _initializeOwlCarousel: function(selector) {
             // get the ul as the tab carousel
-            var tabsOwl = $('.owl-carousel');
+            var $carousel = $(selector);
             // add event listeners to each item
-            Array.from(tabs).forEach(lang.hitch(this, function(item) {
+            Array.from(this.tabs).forEach(lang.hitch(this, function(item) {
                 this.connect(item, 'onclick', lang.hitch(this, function() {
-                    tabsOwl.owlCarousel('to', item.dataset.id * 1);
-                    this._updateButtonVisibility(item.dataset.id * 1);
+                    var clicked = Array.from(item.parentElement.parentElement.children).indexOf(item.parentElement);
+                    // console.log(`you clicked  ${clicked}`);
+                    $carousel.owlCarousel('to', clicked);
+                    this._updateButtonVisibility(clicked, selector);
                 }))
             }));
 
@@ -100,51 +116,51 @@ define([
                 }
             };
 
-            tabsOwl.owlCarousel(options);
+            $carousel.owlCarousel(options);
 
             // set the icons
-            $('.owl-next').addClass('glyphicon glyphicon-chevron-right')
-            $('.owl-prev').addClass('glyphicon glyphicon-chevron-left')
+            $carousel.find('.owl-next').addClass('glyphicon glyphicon-chevron-right')
+            $carousel.find('.owl-prev').addClass('glyphicon glyphicon-chevron-left')
 
             // move the nav buttons up appropriately
-            var tabsHeight = $('.owl-stage-outer').height(),
-                buttonContainerHeight = $('.owl-nav').height();
-            $('.owl-nav').css({
+            var tabsHeight = $carousel.find('.owl-stage-outer').height(),
+                buttonContainerHeight = $carousel.find('.owl-nav').height();
+            $carousel.find('.owl-nav').css({
                 position: 'relative',
                 top: -1 * (tabsHeight / 2 + buttonContainerHeight / 2) + 'px'
             });
-
-            // add the no swiping class
-            $('.owl-stage-outer').addClass('swiper-no-swiping')
-            $(ul).css({ height: $(ul).height() - $('.owl-nav').height() + 'px' })
-
-            if (this.TabsClass) {
-                $('.owl-stage-outer').addClass(this.TabsClass)
-            }
-
-
-            this._executeCallback(callback);
         },
 
-        _updateButtonVisibility: function(id) {
+        _setupDOM: function() {
+            // get the wrapper and each item
+            this.ul = this.domNode.parentElement.querySelector('ul');
+            this.tabs = this.ul.children;
+            this.instanceContainerSelector = '.owl-carousel.' + this.id;
+
+            // set the className on the wrapper
+            this.ul.className += this.instanceContainerSelector.replace(/\./g, ' ');
+        },
+
+        _updateButtonVisibility: function(id, selector) {
             // console.log(`You clicked ${id}`)
-            var sItems = this.smallNumber,
+            var $carousel = $(selector),
+                sItems = this.smallNumber,
                 lItems = this.largeNumber,
-                active = $('.owl-item.active').length,
-                allItems = $('.owl-item').length;
+                active = $carousel.find('.owl-item.active').length,
+                allItems = $carousel.find('.owl-item').length;
             // if the number of active tabs is less than the number that should be displayed, hide some buttons..?
             if (window.innerWidth > this.breakpoint && active < lItems || window.innerWidth < this.breakpoint && active < sItems) {
                 if (id > allItems / 2) {
                     // if the one you click is > half, hide the next button    
-                    $('.owl-next').addClass('invisible')
-                    $('.owl-prev').removeClass('invisible')
+                    $carousel.find('.owl-next').addClass('invisible')
+                    $carousel.find('.owl-prev').removeClass('invisible')
                 } else {
                     // if the one you click is < half, hide the prev button
-                    $('.owl-prev').addClass('invisible')
-                    $('.owl-next').removeClass('invisible')
+                    $carousel.find('.owl-prev').addClass('invisible')
+                    $carousel.find('.owl-next').removeClass('invisible')
                 }
             } else {
-                $('.owl-prev, .owl-next').removeClass('invisible');
+                $carousel.find('.owl-prev, .owl-next').removeClass('invisible');
             }
 
 
